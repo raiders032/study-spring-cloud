@@ -29,5 +29,9 @@ spring:
           predicates:
             - Path=/second-service/**
           filters:
-            - CustomFilter
-
+            - name: CustomFilter
+            - name: LoggingFilter
+              args:
+                baseMessage: Spring Cloud Gateway Logging Filter
+                preLogger: true
+                postLogger: true
