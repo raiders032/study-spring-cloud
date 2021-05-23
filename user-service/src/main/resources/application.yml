@@ -5,7 +5,9 @@ spring:
     name: user-service
 eureka:
   instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+greeting:
+  message: Welcome to the simple E-commerce.
