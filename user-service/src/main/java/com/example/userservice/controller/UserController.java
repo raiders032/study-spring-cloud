@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/user-service")
 @RestController
 public class UserController {
 
@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/health-check")
     public String status() {
-        return "It's Working in User Service";
+        return String.format("It's Working in User Service on PORT %s", environment.getProperty("local.server.port"));
     }
 
     @GetMapping("/welcome")
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity createUser(@RequestBody RequestUser requestUser){
+    public ResponseEntity createUser(@RequestBody RequestUser requestUser) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
