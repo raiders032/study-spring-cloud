@@ -1,11 +1,13 @@
 package com.example.catalogservice.entity;
 
+import lombok.Getter;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Getter
 @Entity
 public class Catalog implements Serializable {
 
