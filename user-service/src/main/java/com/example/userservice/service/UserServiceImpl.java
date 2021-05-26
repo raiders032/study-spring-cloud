@@ -6,6 +6,7 @@ import com.example.userservice.repository.UserRepository;
 import com.example.userservice.vo.ResponseOrder;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<User> getUserByAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUserId(username);
+
+        if (user == null)
+            throw new UsernameNotFoundException(username);
+
+
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getEncryptedPassword(),
+                true, true, true, true, new ArrayList<>());
     }
 }
