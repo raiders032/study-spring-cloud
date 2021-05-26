@@ -17,14 +17,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final Environment environment;
     private final UserService userService;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
         http.authorizeRequests().antMatchers("/**")
-                .hasIpAddress("10.25.17.24")
+                .hasIpAddress("192.168.0.12")
                 .and()
                 .addFilter(getAuthenticationFilter());
 
@@ -33,7 +33,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
