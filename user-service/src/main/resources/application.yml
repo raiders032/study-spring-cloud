@@ -21,3 +21,6 @@ eureka:
       defaultZone: http://127.0.0.1:8761/eureka
 greeting:
   message: Welcome to the simple E-commerce.
+logging:
+  level:
+    com.example.userservice: DEBUG
