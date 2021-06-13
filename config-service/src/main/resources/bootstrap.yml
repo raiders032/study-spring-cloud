@@ -1,2 +1,5 @@
 encrypt:
-  key: xcmweroixkjcvnsdi13407sdfph23m
+  key-store:
+    location: file://${user.home}/Desktop/project/study-spring-cloud/keystore/apiEncryptionKey.jks
+    password: 1q2w3e4r
+    alias: apiEncryptionKey
