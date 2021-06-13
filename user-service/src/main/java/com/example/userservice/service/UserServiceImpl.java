@@ -1,6 +1,7 @@
 package com.example.userservice.service;
 
 import com.example.userservice.User;
+import com.example.userservice.client.OrderServiceClient;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.repository.UserRepository;
 import com.example.userservice.vo.ResponseOrder;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
+    private final OrderServiceClient orderServiceClient;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -42,9 +44,9 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User not found");
 
         UserDto userDto = modelMapper.map(user, UserDto.class);
-        List<ResponseOrder> orders = new ArrayList<>();
-        userDto.setOrders(orders);
 
+        List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
+        userDto.setOrders(orders);
         return userDto;
     }
 
